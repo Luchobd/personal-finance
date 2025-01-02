@@ -1,0 +1,7 @@
+[
+  {
+    "title": "store",
+    "location": "./src/helpers/store",
+    "path": "./helpers/store"
+  }
+]

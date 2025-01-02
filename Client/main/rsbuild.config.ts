@@ -12,7 +12,8 @@ export default defineConfig({
         new ModuleFederationPlugin({
           name: 'main',
           remotes: {
-            ui: 'ui@http://localhost:8002/mf-manifest.json', 
+            ui: 'ui@http://localhost:8002/mf-manifest.json',
+            core: 'core@http://localhost:8003/mf-manifest.json',
           },
           shared: ['react', 'react-dom'],
         }),
