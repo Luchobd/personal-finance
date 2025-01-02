@@ -10,15 +10,17 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@module-federation/enhanced": "0.7.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "@module-federation/enhanced": "0.7.3"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "^9.12.0",
     "@rsbuild/core": "^1.1.8",
+    "@rsbuild/plugin-node-polyfill": "^1.2.0",
     "@rsbuild/plugin-react": "^1.0.7",
+    "@types/node": "^22.10.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.12.0",

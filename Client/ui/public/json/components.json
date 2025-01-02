@@ -1,0 +1,7 @@
+[
+  {
+    "title": "login",
+    "location": "./src/view/login",
+    "path": "./view/login"
+  }
+]

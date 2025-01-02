@@ -1,6 +1,9 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+import { generateExposes } from '../../Global/types/src/generateExposes';
+
+const exposes = generateExposes({ dirname: __dirname, folder: 'view' });
 
 export default defineConfig({
   server: {
@@ -22,9 +25,7 @@ export default defineConfig({
           remotes: {
             common: 'common@http://localhost:8001/mf-manifest.json',
           },
-          exposes: {
-            './login': './src/view/login',
-          },
+          exposes,
           shared: ['react', 'react-dom'],
         }),
       ]);

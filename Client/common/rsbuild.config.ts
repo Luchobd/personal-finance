@@ -1,6 +1,10 @@
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+import { generateExposes } from '../../Global/types/src/generateExposes';
+import { pluginNodePolyfill } from '@rsbuild/plugin-node-polyfill';
+
+const exposes = generateExposes({ dirname: __dirname, folder: 'components' });
 
 export default defineConfig({
   server: {
@@ -19,9 +23,7 @@ export default defineConfig({
       appendPlugins([
         new ModuleFederationPlugin({
           name: 'common',
-          exposes: {
-            './button': './src/components/button',
-          },
+          exposes,
           shared: ['react', 'react-dom'],
         }),
       ]);
@@ -34,5 +36,6 @@ export default defineConfig({
         router: false,
       },
     }),
+    pluginNodePolyfill(),
   ],
 });

@@ -1,0 +1,12 @@
+[
+  {
+    "title": "button",
+    "location": "./src/components/button",
+    "path": "./components/button"
+  },
+  {
+    "title": "input",
+    "location": "./src/components/input",
+    "path": "./components/input"
+  }
+]
