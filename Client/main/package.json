@@ -4,14 +4,15 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rsbuild build",
-    "dev": "rsbuild dev --open",
+    "dev": "rsbuild dev",
     "format": "prettier --write .",
     "lint": "eslint .",
     "preview": "rsbuild preview"
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "@module-federation/enhanced": "0.7.3"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.0",
