@@ -1,10 +1,11 @@
 {
-  "name": "rsbuild-react-ts",
+  "name": "core",
   "private": true,
   "version": "1.0.0",
   "scripts": {
     "build": "rsbuild build",
     "dev": "rsbuild dev",
+    "dev:all": "rsbuild dev",
     "format": "prettier --write .",
     "lint": "eslint .",
     "preview": "rsbuild preview"
