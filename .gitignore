@@ -1,3 +1,11 @@
+# modules
 node_modules/
-.vscode/
 
+# environment
+.env
+
+# vscode
+.vscode
+
+# postgres
+postgres
