@@ -1,3 +1,9 @@
+# Modules
 node_modules/
+
+# VSCode
 .vscode/
+
+# Docker and DataBase
+postgres
 
