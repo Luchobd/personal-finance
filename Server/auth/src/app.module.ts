@@ -8,6 +8,7 @@ import * as Joi from 'joi';
 import config, { environments } from './config';
 import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './common/database/database.module';
+import { EmailModule } from './common/email/email.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { DatabaseModule } from './common/database/database.module';
     }),
     DatabaseModule,
     UsersModule,
+    EmailModule,
   ],
   controllers: [],
   providers: [],
