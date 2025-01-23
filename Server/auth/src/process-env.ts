@@ -1,0 +1,13 @@
+export const {
+  PORT,
+  DB_HOST,
+  DB_PORT,
+  DB_USERNAME,
+  DB_PASSWORD,
+  DB_NAME,
+  KEY_RESEND,
+  EMAIL_RESEND,
+  API_KEY,
+  SECRET_KEY_JWT,
+  SECRET_KEY_JWT_EMAIL,
+} = process.env;
