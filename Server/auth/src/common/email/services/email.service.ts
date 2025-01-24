@@ -52,19 +52,26 @@ export class EmailService {
     const capitalizedNewName = capitalizeFirstLetter(type);
     this.jobExecutionCounts[type] = 0;
 
+    const uniqueJobName = `${type}_${user_id}`;
+
     try {
-      //TODO TAREA
-      // Crear un nuevo trabajo cron que se ejecuta cada minuto
+      // * Verificar si el CronJob ya existe y omitir la creación si ya existe
+      if (this.schedulerRegistry.doesExist('cron', uniqueJobName)) {
+        console.error(
+          `El CronJob con el nombre ${uniqueJobName} ya existe. Se omite la creación.`,
+        );
+        return;
+      }
+
+      // * Crear un nuevo CronJob
       const job = new CronJob('*/1 * * * *', async () => {
         try {
-          // Incrementar el contador de ejecuciones del trabajo
           this.jobExecutionCounts[type]++;
           const countName = this.jobExecutionCounts[type];
           const totalTypeTemplate = Object.values(TypeTemplateRegister).filter(
             (e) => e.includes(type),
           ).length;
 
-          // Buscar el usuario por ID
           const user = await this.userRepo.findOne({ where: { user_id } });
 
           if (
@@ -101,7 +108,6 @@ export class EmailService {
             ],
           });
 
-          // * si no realizan validaciones cancela y si es reset elimina
           if (countName === totalTypeTemplate - 1) {
             if (type === 'register') {
               await this.userRepo.remove(user);
@@ -121,15 +127,12 @@ export class EmailService {
         }
       });
 
-      //TODO TERMINA TAREA
-
-      // TODO AGREGA LA TAREA
-      this.schedulerRegistry.addCronJob(type, job);
+      this.schedulerRegistry.addCronJob(uniqueJobName, job);
       job.start();
 
       const user = await this.userRepo.findOne({ where: { user_id } });
 
-      if (!user) return console.error('No se encontro el usuario');
+      if (!user) return console.error('No se encontró el usuario');
 
       // ? EMAIL
       console.log(

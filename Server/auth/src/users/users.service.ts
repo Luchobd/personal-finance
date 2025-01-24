@@ -30,12 +30,16 @@ export class UsersService {
       newUser.password = hashPassword;
       const userCreate = await this.userRepo.save(newUser);
 
-      this.emailService.addCronJob({
-        passwordTemporality: temporaryPassword,
-        user_id: userCreate.user_id,
-        type: AddCronJob.Register,
-        email: userCreate.email,
-      });
+      try {
+        this.emailService.addCronJob({
+          passwordTemporality: temporaryPassword,
+          user_id: userCreate.user_id,
+          type: AddCronJob.Register,
+          email: userCreate.email,
+        });
+      } catch (error) {
+        console.error('Error al agregar el CronJob:', error.message);
+      }
 
       return userCreate;
     } catch (error) {
