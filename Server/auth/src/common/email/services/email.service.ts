@@ -5,10 +5,10 @@ import { CronJob } from 'cron';
 import { User } from '../../../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { sendEmail } from './email';
-import { TypeTemplateRegistre } from '../templates/template';
+import { TypeTemplateRegister } from '../templates/template';
 
 export enum AddCronJob {
-  Registre = 'registre',
+  Register = 'register',
   Reset = 'reset',
   ValidateEmail = 'validateEmail',
 }
@@ -19,8 +19,8 @@ function capitalizeFirstLetter(string: string): string {
 }
 
 export type AddCronJobMap = {
-  [AddCronJob.Registre]: {
-    type: AddCronJob.Registre;
+  [AddCronJob.Register]: {
+    type: AddCronJob.Register;
     user_id: string;
     email: string;
     passwordTemporality: string;
@@ -60,7 +60,7 @@ export class EmailService {
           // Incrementar el contador de ejecuciones del trabajo
           this.jobExecutionCounts[type]++;
           const countName = this.jobExecutionCounts[type];
-          const totalTypeTemplate = Object.values(TypeTemplateRegistre).filter(
+          const totalTypeTemplate = Object.values(TypeTemplateRegister).filter(
             (e) => e.includes(type),
           ).length;
 
@@ -69,7 +69,7 @@ export class EmailService {
 
           if (
             !user ||
-            (type === AddCronJob.Registre && user.verified) ||
+            (type === AddCronJob.Register && user.verified) ||
             (type === AddCronJob.ValidateEmail && user.verifiedEmail) ||
             (type === AddCronJob.Reset && user.verified)
           ) {
@@ -96,14 +96,14 @@ export class EmailService {
               data.type !== AddCronJob.ValidateEmail
                 ? data.passwordTemporality
                 : '',
-            type: TypeTemplateRegistre[
-              `${capitalizedNewName}_${this.jobExecutionCounts[type]}` as keyof typeof TypeTemplateRegistre
+            type: TypeTemplateRegister[
+              `${capitalizedNewName}_${this.jobExecutionCounts[type]}` as keyof typeof TypeTemplateRegister
             ],
           });
 
           // * si no realizan validaciones cancela y si es reset elimina
           if (countName === totalTypeTemplate - 1) {
-            if (type === 'registre') {
+            if (type === 'register') {
               await this.userRepo.remove(user);
             }
             if (type === AddCronJob.ValidateEmail) {
@@ -148,8 +148,8 @@ export class EmailService {
           data.type !== AddCronJob.ValidateEmail
             ? data.passwordTemporality
             : '',
-        type: TypeTemplateRegistre[
-          `${capitalizedNewName}_${this.jobExecutionCounts[type]}` as keyof typeof TypeTemplateRegistre
+        type: TypeTemplateRegister[
+          `${capitalizedNewName}_${this.jobExecutionCounts[type]}` as keyof typeof TypeTemplateRegister
         ],
       });
     } catch (error) {

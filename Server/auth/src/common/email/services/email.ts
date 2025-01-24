@@ -1,12 +1,12 @@
 // import { Resend } from 'resend';
-import { templateRegistre, TemplateRegistre } from '../templates/template';
+import { templateRegister, TemplateRegister } from '../templates/template';
 import 'dotenv/config';
 
 // const resend = new Resend(process.env.KEY_RESEND || '');
 
-export async function sendEmail(param: TemplateRegistre): Promise<boolean> {
+export async function sendEmail(param: TemplateRegister): Promise<boolean> {
   try {
-    const { html, subject } = templateRegistre(param);
+    const { html, subject } = templateRegister(param);
 
     console.log({ param, html, subject });
 

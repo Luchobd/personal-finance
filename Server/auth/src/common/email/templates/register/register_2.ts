@@ -76,7 +76,7 @@ export const register_2 = ({ name }: { name: string }) => {
               <ol>
                 <li>
                   Ingresa al siguiente enlace para crear una nueva cuenta: 
-                  <a href="${process.env.URL_CLIENT}/registre">Crear cuenta</a>
+                  <a href="${process.env.URL_CLIENT}/register">Crear cuenta</a>
                 </li>
                 <li>
                   Una vez creada la cuenta, asegúrate de activarla dentro de un lapso de 10 minutos para

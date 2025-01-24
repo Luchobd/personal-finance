@@ -33,7 +33,7 @@ export class UsersService {
       this.emailService.addCronJob({
         passwordTemporality: temporaryPassword,
         user_id: userCreate.user_id,
-        type: AddCronJob.Registre,
+        type: AddCronJob.Register,
         email: userCreate.email,
       });
 
